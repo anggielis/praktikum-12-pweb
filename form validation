@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Pemesanan Tiket</title>
+    <script>
+        function validateForm() {
+            // Ambil nilai dari masing-masing input
+            var namaPelanggan = document.getElementById('namaPelanggan').value;
+            var email = document.getElementById('email').value;
+            var jamKeberangkatan = document.getElementById('jamKeberangkatan').value;
+            var tujuanKeberangkatan = document.getElementById('tujuanKeberangkatan').value;
+            var jumlahTiket = document.getElementById('jumlahTiket').value;
+
+            // Validasi Nama Pelanggan (maksimal 30 karakter)
+            if (namaPelanggan.length > 30) {
+                alert('Nama pelanggan maksimal 30 karakter');
+                return false;
+            }
+
+            // Validasi Email menggunakan regular expression sederhana
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                alert('Format email tidak valid');
+                return false;
+            }
+
+            // Validasi Jam Keberangkatan (contoh: harus diisi)
+            if (jamKeberangkatan === '') {
+                alert('Jam keberangkatan harus diisi');
+                return false;
+            }
+
+            // Validasi Tujuan Keberangkatan (contoh: harus diisi)
+            if (tujuanKeberangkatan === '') {
+                alert('Tujuan keberangkatan harus diisi');
+                return false;
+            }
+
+            // Validasi Jumlah Tiket (contoh: harus angka positif)
+            if (isNaN(jumlahTiket) || jumlahTiket <= 0) {
+                alert('Jumlah tiket harus diisi dengan angka positif');
+                return false;
+            }
+
+            // Jika semua validasi berhasil, form dapat disubmit
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <form onsubmit="return validateForm()">
+        <label for="namaPelanggan">Nama Pelanggan:</label>
+        <input type="text" id="namaPelanggan" maxlength="30" required>
+        <br><br>
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+        <br><br>
+        <label for="jamKeberangkatan">Jam Keberangkatan:</label>
+        <input type="time" id="jamKeberangkatan" required>
+        <br><br>
+        <label for="tujuanKeberangkatan">Tujuan Keberangkatan:</label>
+        <input type="text" id="tujuanKeberangkatan" required>
+        <br><br>
+        <label for="jumlahTiket">Jumlah Tiket:</label>
+        <input type="number" id="jumlahTiket" min="1" required>
+        <br><br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
